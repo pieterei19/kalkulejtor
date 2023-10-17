@@ -9,30 +9,114 @@
     <header>To jest prosty kalkulator:</header>
     <br />
     <main class="grid-container">
-      <p></p>
-      <form action="get">
-        <button value="C" class="grid-item">C</button>
-        <button value="()" class="grid-item">()</button>
-        <button value="%" class="grid-item">%</button>
-        <button value="/" class="grid-item">/</button>
-        <button value="7" class="grid-item">7</button>
-        <button value="8" class="grid-item">8</button>
-        <button value="9" class="grid-item">9</button>
-        <button value="X" class="grid-item">X</button>
-        <button value="4" class="grid-item">4</button>
-        <button value="5" class="grid-item">5</button>
-        <button value="6" class="grid-item">6</button>
-        <button value="-" class="grid-item">-</button>
-        <button value="1" class="grid-item">1</button>
-        <button value="2" class="grid-item">2</button>
-        <button value="3" class="grid-item">3</button>
-        <button value="+" class="grid-item">+</button>
-        <button value="0" class="grid-item">0</button>
-        <button value="," class="grid-item">,</button>
-        <button value="=" class="grid-item">=</button>
-      </form>
+      <div id="wysw" class="wysw" type="text"></div>
+      <div>
+      <button id="usun" value="usun" class="buttonik">C</button>
+      <button itemid="dziel" value="dziel" class="buttonik">/</button>
+      <button id="przecinek" value="," class="buttonik">,</button>
+      <button id="wynik" value="wynik" class="buttonik">=</button>
+      <button value="7" class="buttonik">7</button>
+      <button value="8" class="buttonik">8</button>
+      <button value="9" class="buttonik">9</button>
+      <button value="mnoz"  class="buttonik">X</button>
+      <button value="4" class="buttonik">4</button>
+      <button value="5" class="buttonik">5</button>
+      <button value="6" class="buttonik">6</button>
+      <button id="odej" value="odej" class="buttonik">-</button>
+      <button value="1" class="buttonik">1</button>
+      <button value="2" class="buttonik">2</button>
+      <button value="3" class="buttonik">3</button>
+      <button id="dodaj" value="dodaj" class="buttonik">+</button>
+      <button value="0" class="buttonik">0</button>
     </main>
-    <script src="jawka.js"></script>
+  </div>
+    <script>
+      const wysw = document.querySelector('.wysw');
+      const przyciski = document.querySelectorAll('button');
+      let teraz = '';
+      let operator = '';
+      let poprzedni = '';
+      let przycisk = document.querySelectorAll('button').value;
+      document.getElementById('wysw').innerHTML = przyciski;
+      przyciski.forEach((przycisk) => {
+        przycisk.addEventListener('click', function () {
+          const wartosc = przycisk.value;
+          document.getElementById('wysw').innerHTML += poprzedni;
+          switch (wartosc) {
+            case 'usun':
+              teraz = '';
+              operator = '';
+              poprzedni = '';
+              document.getElementById('wysw').innerHTML = "";
+              break;
+            case 'dodaj':
+              if (teraz !== '') {
+                operator = wartosc;
+                poprzedni = teraz;
+                teraz = '';
+                document.getElementById('wysw').innerHTML += poprzedni;
+              }
+              break;
+            case 'odej':
+              if (teraz !== '') {
+                operator = wartosc;
+                poprzedni = teraz;
+                teraz = '';
+                document.getElementById('wysw').innerHTML += poprzedni;
+              }
+              break;
+            case 'mnoz':
+              if (teraz !== '') {
+                operator = wartosc;
+                poprzedni = teraz;
+                teraz = '';
+                document.getElementById('wysw').innerHTML += poprzedni;
+              }
+              break;
+            case 'dziel':
+              if (teraz !== '') {
+                operator = wartosc;
+                poprzedni = teraz;
+                teraz = '';
+                document.getElementById('wysw').innerHTML += poprzedni;
+              }
+              break;
+            console.log(przycisk.value);
+            case 'wynik':
+              console.log(poprzedni);
+              console.log('cos');
+              if (teraz !== '' && poprzedni !== '') {
+                const num1 = parseFloat(poprzedni);
+                const num2 = parseFloat(teraz);
+                switch (operator) {
+                  case 'dodaj':
+                    teraz = num1 + num2;
+                    
+                    break;
+                  case 'odej':
+                    teraz = num1 - num2;
+                    
+                    break;
+                  case 'mnoz':
+                    teraz = num1 * num2;
+                    
+                    break;
+                  case 'dziel':
+                    teraz = num1 / num2;
+                    
+                    break;
+                }
+              }
+              document.getElementById('wysw').innerHTML = teraz;
+              break;
+            default:
+              teraz += wartosc;
+              break;
+          }
+        });
+        
+      });
+    </script>
     <footer>Made by Mateusz Pieter</footer>
   </body>
 </html>
